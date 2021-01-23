@@ -1,0 +1,49 @@
+#######################################
+# Syntax Coloring Map For LedsBehavior Library
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+
+LedsBehavior	KEYWORD1
+LedProperties	KEYWORD1
+
+WS2812B		KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	        KEYWORD2
+read	        KEYWORD2
+reset	        KEYWORD2
+setBehavior	KEYWORD2
+
+setPixelColor	KEYWORD2
+numPixels	KEYWORD2
+Color		KEYWORD2
+show		KEYWORD2
+clear		KEYWORD2
+updateLength	KEYWORD2
+canShow		KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+
+Red		LITERAL1
+Green		LITERAL1
+Blue		LITERAL1
+White		LITERAL1
+Clear		LITERAL1
+Paint		LITERAL1
+Blink		LITERAL1
+Shift		LITERAL1
+Turn		LITERAL1
+Booting		LITERAL1
+Ready		LITERAL1
+Exit		LITERAL1
+
+#######################################

@@ -1,0 +1,44 @@
+#######################################
+# Syntax Coloring Map For LedsBehavior Library
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+MotorDriver	KEYWORD1
+MotorControl	KEYWORD1
+MotorEncoder	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+       
+begin		KEYWORD2        
+setDeadzone	KEYWORD2	     
+setPWM		KEYWORD2	
+
+begin		KEYWORD2
+run		KEYWORD2
+setVelocity	KEYWORD2
+getVelocity	KEYWORD2
+getPosition	KEYWORD2
+resetPosition	KEYWORD2
+
+begin		KEYWORD2
+getSpeed	KEYWORD2
+getPosition	KEYWORD2
+resetPosition	KEYWORD2
+
+#######################################
+# Constants LITERAL1
+
+CLOCKWISE		LITERAL1
+COUNTERCLOCKWISE	LITERAL1
+PWM_16_BITS		LITERAL1
+ENCODER_1		LITERAL1
+ENCODER_2		LITERAL1
+ENCODER_3		LITERAL1
+ENCODER_4		LITERAL1
+
+#######################################
