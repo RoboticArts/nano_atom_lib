@@ -1,0 +1,30 @@
+#######################################
+# Syntax Coloring Map For LedsBehavior Library
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+
+RosInterface	KEYWORD1
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+
+begin	        	KEYWORD2
+run	        	KEYWORD2
+setMotorState	        KEYWORD2
+getMotorSetpoint	KEYWORD2
+setImuData		KEYWORD2
+getLedsProperties	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+
+
+#######################################
