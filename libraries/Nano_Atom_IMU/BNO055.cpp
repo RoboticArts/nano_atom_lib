@@ -36,9 +36,9 @@
     imu_data.linear_acceleration.y = linear_acceleration.y();
     imu_data.linear_acceleration.z = linear_acceleration.z();
 
-    imu_data.angular_velocity.x = angular_velocity.x();
-    imu_data.angular_velocity.y = angular_velocity.y();
-    imu_data.angular_velocity.z = angular_velocity.z();
+    imu_data.angular_velocity.x = angular_velocity.x()*(PI/180);
+    imu_data.angular_velocity.y = angular_velocity.y()*(PI/180);
+    imu_data.angular_velocity.z = angular_velocity.z()*(PI/180);
 
    return imu_data;
   }
