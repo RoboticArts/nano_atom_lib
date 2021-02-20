@@ -19,7 +19,7 @@
      static float elapsed_time[4] = {0,0,0,0};
      static float last_elapsed_time[4] = {0,0,0,0};
 
-     direction_array[encoder] = digitalRead(encoder_pin_b_array[encoder]);
+     direction_array[encoder] = !digitalRead(encoder_pin_b_array[encoder]);
 
      if (direction_array[encoder] == true)
           counter_array[encoder]++;  
@@ -70,11 +70,12 @@
   // --------------------- Quadrature Encoder Class ------------------- //
 
 
-  MotorEncoder::MotorEncoder(int encoder, int encoder_pin_a, int encoder_pin_b, int pulses_per_turn, float wheel_radius){
+  MotorEncoder::MotorEncoder(int encoder, int encoder_pin_a, int encoder_pin_b, int wise, int pulses_per_turn, float wheel_radius){
 
       this->encoder = encoder;
       this->encoder_pin_a = encoder_pin_a;
       this->encoder_pin_b = encoder_pin_b;
+      this->wise = wise;
       this->pulses_per_turn = pulses_per_turn;
       this->wheel_radius = wheel_radius;
 
@@ -124,13 +125,13 @@
 
     // Set units
     if(units.equals("rad"))
-      wheel_position = current_pulses * this->rad_per_pulse;
+      wheel_position = current_pulses * this->rad_per_pulse * this->wise;
 
     if(units.equals("deg"))
-      wheel_position = current_pulses * this->deg_per_pulse;
+      wheel_position = current_pulses * this->deg_per_pulse * this->wise;
   
     if(units.equals("ticks"))
-      wheel_position = current_pulses;
+      wheel_position = current_pulses * this->wise;
       
     return wheel_position;
   }
@@ -179,10 +180,10 @@
   
   
     if(dir == true){
-      velocity_value = 1*abs(velocity_value);
+      velocity_value = 1*abs(velocity_value)* this->wise;
     }
     else{
-      velocity_value = -1*abs(velocity_value);
+      velocity_value = -1*abs(velocity_value)* this->wise;
     }
   
     float current_period_per_pulse = (micros() - last_time)/1000.0;

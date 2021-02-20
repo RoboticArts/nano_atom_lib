@@ -10,11 +10,14 @@
 
 #define ENCODER_THRESHOLD 250 // Timeout in ms to consider zero speed
 
+#define CLOCKWISE 1
+#define COUNTERCLOCKWISE -1
+
 class MotorEncoder{ 
   
   public:
 
-    MotorEncoder(int encoder, int encoder_pin_a, int encoder_pin_b, int pulses_per_turn, float wheel_radius);
+    MotorEncoder(int encoder, int encoder_pin_a, int encoder_pin_b, int wise, int pulses_per_turn, float wheel_radius);
     void begin(void);
     float getSpeed(String units);
     float getPosition(String units);
@@ -27,6 +30,7 @@ class MotorEncoder{
     float rad_per_pulse = 0;
     float deg_per_pulse = 0;
     int encoder = 0; 
+    int wise;
     int encoder_pin_a, encoder_pin_b;
 
 };
