@@ -28,6 +28,7 @@ class LedsBehavior : public LedsHardware{
     void run();
     void reset();
     void setBehavior(struct LedProperties led_properties);
+    void setBehavior(String led_properties_msg);
     
 
     enum colors { Red=0x140000,

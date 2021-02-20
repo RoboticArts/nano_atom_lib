@@ -206,6 +206,58 @@
       
   }
 
+  void LedsBehavior::setBehavior(String led_properties_msg){
+
+    Serial.println(led_properties_msg);
+
+    String properties[9];
+    
+    int fromIndex = 0;
+    int toIndex = 0;
+
+    for (int i = 0; i<8; i++){
+    
+      toIndex = led_properties_msg.indexOf(',', fromIndex);
+      properties[i] = led_properties_msg.substring(fromIndex, toIndex); 
+      Serial.println(properties[i]); 
+      fromIndex = toIndex + 1; 
+    }
+    /*
+    this->led_properties.command = Blink;
+    this->led_properties.init_led = 0;
+    this->led_properties.end_led = 0;
+    this->led_properties.color = 0xFF0000;
+    this->led_properties.time = 500;
+    this->led_properties.direction = 0;
+*/
+
+    // Select mode
+    if (properties[1] == "paint")
+      this->led_properties.command = Paint;
+    if (properties[1] == "blink")
+      this->led_properties.command = Blink;
+    if (properties[1] == "shift")
+      this->led_properties.command = Shift;
+
+
+    // Zone
+    this->led_properties.init_led = properties[2].toInt();
+    this->led_properties.end_led = properties[3].toInt();
+
+    // Color
+    uint32_t color_R = properties[4].toInt();
+    uint32_t color_G = properties[5].toInt();
+    uint32_t color_B = properties[6].toInt();
+    this->led_properties.color = ( (uint32_t(color_R) << 16) | (uint32_t(color_G) << 8) ) | uint32_t(color_B);
+
+    // Time
+    this->led_properties.time = properties[7].toInt();
+
+    // Direction
+    this->led_properties.direction = properties[8].toInt();
+  
+  }
+
   void LedsBehavior::run(){
 
     if (isNewBehavior(led_properties))
