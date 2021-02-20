@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>nano_atom_driver</name>
+  <version>0.0.0</version>
+  <description>The nano_atom_driver package</description>
+
+  <author email="roboticarts1@gmail.com">Robert Vasquez Zavaleta</author>
+  <maintainer email="roboticarts1@gmail.com">Robert Vasquez Zavaleta</maintainer>
+
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+  <build_depend>roscpp</build_depend>
+  <exec_depend>roscpp</exec_depend>
+
+  <build_depend>std_msgs</build_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <build_depend>std_srvs</build_depend>
+  <exec_depend>std_srvs</exec_depend>
+
+  <build_depend>sensor_msgs</build_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+</package>
+
