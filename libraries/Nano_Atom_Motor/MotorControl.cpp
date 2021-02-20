@@ -2,17 +2,16 @@
 
   #include "MotorControl.h"
 
-  MotorControl::MotorControl(MotorDriver &motor, MotorEncoder &encoder, int direction, 
-                             float setpoint_threshold, float minimun_setpoint, double Kp, double Ki, double Kd){
+  MotorControl::MotorControl(MotorDriver &motor, MotorEncoder &encoder, float setpoint_threshold, float minimum_setpoint, double Kp, double Ki, double Kd){
     
     this->motor = new MotorDriver(motor);
     this->encoder = new MotorEncoder(encoder);
     this->direction = direction;
     this->setpoint_threshold = setpoint_threshold;
     this->minimum_setpoint = minimum_setpoint;
-    
+  
     mPID = new PID(&this->Input, &this->Output, &this->Setpoint, Kp, Ki, Kd, DIRECT);
-
+    
 
   }
 
@@ -36,13 +35,6 @@
 
   void MotorControl::run(void){
 
-    if (direction == DIRECT)
-      Setpoint = Setpoint;
-    if (direction == REVERSE)
-      Setpoint = -Setpoint;
-   
-    
- 
     if (abs(Setpoint) >= this->minimum_setpoint){
       
       Input = encoder->getSpeed("rad/s");

@@ -21,8 +21,8 @@ class MotorControl{
      PID *mPID;
   
   public:
-
-     MotorControl(MotorDriver &motor, MotorEncoder &encoder, int direction, float setpoint_threshold, float minimun_setpoint, double Kp, double Ki, double Kd);
+    
+     MotorControl(MotorDriver &motor, MotorEncoder &encoder, float setpoint_threshold, float minimum_setpoint, double Kp, double Ki, double Kd);
      void begin(void);
      void run(void);
      void setVelocity(double velocity);
