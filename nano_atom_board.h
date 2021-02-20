@@ -10,8 +10,8 @@
 #define WHEEL_RADIUS float(0.0215)
 
 // Motor names
-#define MOTOR_FRONT_LEFT   0
-#define MOTOR_FRONT_RIGHT  1
+#define MOTOR_LEFT   0
+#define MOTOR_RIGHT  1
 
 // Front left motor
 #define ENC_A_FRONT_LEFT PB14
@@ -30,8 +30,8 @@
 #define STBY_FRONT PA3
 
 // Control parameters
-#define SETPOINT_THRESHOLD 0.3 // Setpoints between 0 and SETPOINT_THRESHOLD are considered zero 
-#define MINIMUM_SETPOINT 1.5    // Setpoints between SETPOINT_THRESHOLD and MINIMUM_SETPOINT are considered MINIMUM_SETPOINT
+#define SETPOINT_THRESHOLD float(1.0) // Setpoints between 0 and SETPOINT_THRESHOLD are considered zero 
+#define MINIMUM_SETPOINT float(1.0)    // Setpoints between SETPOINT_THRESHOLD and MINIMUM_SETPOINT are considered MINIMUM_SETPOINT
 
 
 #endif
