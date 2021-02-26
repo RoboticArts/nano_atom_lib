@@ -25,8 +25,8 @@
   <build_depend>sensor_msgs</build_depend>
   <exec_depend>sensor_msgs</exec_depend>
 
-  <build_depend>message_generation</build_depend>
-  <exec_depend>message_runtime</exec_depend>
+  <build_depend>roboticarts_msgs</build_depend>
+  <exec_depend>roboticarts_msgs</exec_depend>
 
 </package>
 

@@ -9,27 +9,6 @@ find_package(catkin REQUIRED COMPONENTS
     std_srvs
     sensor_msgs
     roboticarts_msgs
-    message_generation
-)
-
-
-#add_message_files(DIRECTORY msg
-#    FILES
-#
-#)
-
-
-#add_service_files(DIRECTORY srv
-#    FILES
-#    LedProperties.srv
-#)
-
-
-generate_messages(
-   DEPENDENCIES
-   std_msgs
-   std_srvs
-   sensor_msgs
 )
 
 
@@ -39,7 +18,7 @@ catkin_package(
     std_msgs
     std_srvs
     sensor_msgs
-    message_runtime
+    roboticarts_msgs
 )
 
 
