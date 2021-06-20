@@ -1,0 +1,31 @@
+#######################################
+# Syntax Coloring Map For LedsBehavior Library
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+
+SerialInterface	KEYWORD1
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+
+begin	        	KEYWORD2
+writeSerialFrequency	        	KEYWORD2
+run	        	KEYWORD2
+setMotorState	        KEYWORD2
+getMotorSetpoint	KEYWORD2
+setImuData		KEYWORD2
+getLedsProperties	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+
+
+#######################################
