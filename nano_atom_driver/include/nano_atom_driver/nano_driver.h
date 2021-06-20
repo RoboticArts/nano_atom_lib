@@ -1,6 +1,8 @@
 #ifndef NANO_DRIVER_H
 #define NANO_DRIVER_H
 
+#define JITBUS_BUFFER_SIZE 1000
+#define JITBUS_MIN_BUFFER_SPACE 140
 
 #include "ros/ros.h"
 #include <roboticarts_msgs/SetLeds.h>
@@ -8,6 +10,8 @@
 #include <sensor_msgs/JointState.h>
 #include <sensor_msgs/Imu.h>
 #include <std_msgs/String.h>
+#include "jitbus.h"
+
 
 
 class NanoDriver{
@@ -18,40 +22,68 @@ class NanoDriver{
 
     private:
 
+        // Jitbus variables
+
+        SerialJitbus jit;
+        enum jit_ids {IMU_DATA_ID, MOTOR_STATE_ID, MOTOR_SETPOINT_ID, LED_ID};
+
+        struct Imu {
+            float orientation_x;
+            float orientation_y;
+            float orientation_z;
+            float orientation_w;
+            float angular_velocity_x;
+            float angular_velocity_y;
+            float angular_velocity_z;
+            float linear_acceleration_x;
+            float linear_acceleration_y;
+            float linear_acceleration_z;
+        };
+
+        struct MotorState{
+            
+            float position[4];
+            float velocity[4];
+
+        };
+
+        Imu jit_imu_data;
+        MotorState jit_motor_state;
+        float jit_motor_setpoint[4];
+        char jit_led_properties[31];
+
+        // ROS variables 
+
         ros::NodeHandle _nh;
         std::string node_name;
 
         XmlRpc::XmlRpcValue leds_signals; 
         bool leds_signals_file_exists;
 
-        ros::Publisher  motor_setpoint_pub;
-        ros::Subscriber motor_setpoint_sub;
+        ros::Subscriber  ros_motor_setpoint_sub;
+        ros::Publisher  ros_motor_state_pub;    
+        ros::Publisher ros_imu_data_pub;
+        ros::ServiceServer ros_set_leds_service;
 
-        ros::Publisher  motor_state_pub;
-        ros::Subscriber motor_state_sub;
-        
-        ros::Subscriber imu_data_sub;
-        ros::Publisher imu_data_pub;
+        std_msgs::Float32MultiArray ros_motor_setpoint;
+        sensor_msgs::JointState ros_motor_state;
+        sensor_msgs::Imu ros_imu_data;
+        std_msgs::String ros_led_properties_msg;
 
-        ros::ServiceServer set_leds_service;
-        ros::Publisher set_leds_pub;
-
-        std_msgs::Float32MultiArray motor_setpoint;
-        sensor_msgs::JointState motor_state;
-        sensor_msgs::Imu imu_data;
-        std_msgs::String led_properties_msg;
 
         void motorSetpointCallback(const std_msgs::Float32MultiArray::ConstPtr& msg);
-        void motorStateCallback(const sensor_msgs::JointState::ConstPtr& msg);
-        void imuDataCallback(const sensor_msgs::Imu::ConstPtr& msg);
         bool setSignalCallback(roboticarts_msgs::SetLeds::Request& req, roboticarts_msgs::SetLeds::Response& res);
-       
-        void imuDataPublisher();
-        void motorSetpointPublisher();
-        void motorStatePublisher();
 
         void readRosParams();
         std::string readLedsSignals(std::string signal, bool enable);
+
+        void updateRosMotorState(struct MotorState motor_state);
+        void updateRosImuData(struct Imu imu_data);
+
+        double currentTime();
+
+        std::string port;
+        int baudrate;
 
         std::string imu_frame_id;
         std::string imu_topic;
@@ -66,6 +98,10 @@ class NanoDriver{
         bool use_leds;
 
         int num_joints;
+
+        int refresh_time;
+        double time_last;
+        int write_serial_frequency;       
 
 };
 
