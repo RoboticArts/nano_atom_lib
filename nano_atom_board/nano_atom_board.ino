@@ -6,7 +6,7 @@
 #include <MotorEncoder.h>
 #include <MotorControl.h>
 #include <LedsBehavior.h>
-#include <RosInterface.h>
+#include <SerialInterface.h>
 #include <BNO055.h>
 
 #include "nano_atom_board.h"
@@ -23,7 +23,7 @@ elapsedMillis timeout_sys, timeout_motor, timeout_imu;
 
 BNO055 imu_sensor(0x29);
 
-RosInterface ros_interface;
+SerialInterface serial_interface;
 
 LedsBehavior leds_behavior(LED_SIZE, LED_PIN);
 LedsBehavior::LedProperties led_properties; 
@@ -57,23 +57,24 @@ void setup(){
   leds_behavior.begin(); 
   
   #ifndef DEBUG
-    ros_interface.begin(115200);
+    serial_interface.begin(115200);
+    serial_interface.writeSerialFrequency(200);
   #endif
 
   #ifdef DEBUG
-    Serial.begin(115200);
+    Serial.begin(9600);
     pinMode(PB0,INPUT);
   #endif
 
 
   while(!Serial);
-
+  
   led_properties.command = LedsBehavior::Blink;
   led_properties.init_led = 0;
-  led_properties.end_led = 1;
+  led_properties.end_led = 8;
   led_properties.color = LedsBehavior::Blue;
   led_properties.time = 500;
-  
+
 }
 
 
@@ -86,30 +87,30 @@ void loop(){
     left_motor.run();
     right_motor.run();
     leds_behavior.run();
-    ros_interface.run();  
+    serial_interface.run();  
   
   
     // Get motor setpoints from ROS
-    setpoint_1 = ros_interface.getMotorSetpoint(MOTOR_LEFT);
+    setpoint_1 = serial_interface.getMotorSetpoint(MOTOR_LEFT);
     left_motor.setVelocity(setpoint_1);
   
-    setpoint_2 = ros_interface.getMotorSetpoint(MOTOR_RIGHT);
+    setpoint_2 = serial_interface.getMotorSetpoint(MOTOR_RIGHT);
     right_motor.setVelocity(setpoint_2);
   
     
     // Send motor position and velocity to ROS
     position_1 = left_motor.getPosition("rad");
     velocity_1 = left_motor.getVelocity("rad/s");
-    ros_interface.setMotorState(MOTOR_LEFT, position_1, velocity_1);
+    serial_interface.setMotorState(MOTOR_LEFT, position_1, velocity_1);
   
     position_2 = right_motor.getPosition("rad");
     velocity_2 = right_motor.getVelocity("rad/s");
-    ros_interface.setMotorState(MOTOR_RIGHT, position_2, velocity_2);
+    serial_interface.setMotorState(MOTOR_RIGHT, position_2, velocity_2);
   
   
   
     // Send IMU data to ROS
-    
+  
      if (timeout_imu > 20){
         timeout_imu = 0;
         
@@ -125,15 +126,18 @@ void loop(){
         linear_acceleration[0] = imu_data.linear_acceleration.x;
         linear_acceleration[1] = imu_data.linear_acceleration.y;
         linear_acceleration[2] = imu_data.linear_acceleration.z;
-        ros_interface.setImuData(orientation, angular_velocity, linear_acceleration);
+        serial_interface.setImuData(orientation, angular_velocity, linear_acceleration);
+
+        led_properties_msg = serial_interface.getLedsProperties(); 
+        leds_behavior.setBehavior(led_properties_msg); 
   
      }
 
-     /*
+      
+
   // Get led properties as a string
-  led_properties_msg = ros_interface.getLedsProperties(); // Overload as string
-  //leds_behavior.setBehavior(led_properties_msg); 
-*/  
+  //led_properties_msg = "FORWARD,blink,2,17,0,10,0,500,";
+
 
 
 
