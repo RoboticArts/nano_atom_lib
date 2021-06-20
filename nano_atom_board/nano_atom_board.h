@@ -2,7 +2,7 @@
 #define STM32_NANO_ATOM_H
 
 // Led priperties
-#define LED_SIZE 3
+#define LED_SIZE 18
 #define LED_PIN PA7
 
 // Motor properties
