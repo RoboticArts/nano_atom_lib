@@ -1,0 +1,3 @@
+[submodule "nano_atom_board/libraries/jitbus"]
+	path = nano_atom_board/libraries/jitbus
+	url = https://github.com/RoboticArts/jitbus
