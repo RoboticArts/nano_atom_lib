@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
     std_srvs
     sensor_msgs
     roboticarts_msgs
+    jitbus
 )
 
 
@@ -19,6 +20,7 @@ catkin_package(
     std_srvs
     sensor_msgs
     roboticarts_msgs
+    jitbus
 )
 
 

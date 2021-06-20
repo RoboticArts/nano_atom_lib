@@ -31,5 +31,7 @@
   <build_depend>roboticarts_msgs</build_depend>
   <exec_depend>roboticarts_msgs</exec_depend>
 
+  <depend>jitbus</depend>
+
 </package>
 
