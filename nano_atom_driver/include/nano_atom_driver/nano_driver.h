@@ -2,7 +2,7 @@
 #define NANO_DRIVER_H
 
 #define JITBUS_BUFFER_SIZE 1000
-#define JITBUS_MIN_BUFFER_SPACE 140
+#define JITBUS_DISABLE_LOG
 
 #include "ros/ros.h"
 #include <roboticarts_msgs/SetLeds.h>
@@ -51,6 +51,8 @@ class NanoDriver{
         MotorState jit_motor_state;
         float jit_motor_setpoint[4];
         char jit_led_properties[31];
+        uint32_t motor_timer;
+        uint32_t led_timer;
 
         // ROS variables 
 

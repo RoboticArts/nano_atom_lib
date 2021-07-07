@@ -44,6 +44,9 @@ NanoDriver::NanoDriver(ros::NodeHandle nodehandle):_nh(nodehandle){
 
     time_last = currentTime();
 
+    motor_timer = 0;
+    led_timer = 0;
+
     // Node ready
     ROS_INFO("%s node ready!", node_name.c_str());
 
@@ -224,15 +227,10 @@ void NanoDriver::run(){
     while (ros::ok()){
 
 
-        if (currentTime() - time_last > refresh_time){
-            
-            jit.sendPacket(jit_led_properties, LED_ID); 
-            jit.sendPacket(jit_motor_setpoint, MOTOR_SETPOINT_ID);
-            time_last = currentTime();
-        }
-        
+        jit.sendPacketHz(jit_led_properties, LED_ID, led_timer, 50); 
+        jit.sendPacketHz(jit_motor_setpoint, MOTOR_SETPOINT_ID, motor_timer, 50);
 
-        if(jit.available()){
+        if(jit.available() > 0){
 
             if (jit.receivePacket(jit_motor_state, MOTOR_STATE_ID)){
 

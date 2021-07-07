@@ -2,8 +2,7 @@
 #define SERIAL_INTERFACE_H
 
 #define JITBUS_BUFFER_SIZE 1000
-#define JITBUS_MIN_BUFFER_SPACE 10
-
+#define JITBUS_DISABLE_LOG
 #include <Arduino.h>
 #include <jitbus.h>
 
