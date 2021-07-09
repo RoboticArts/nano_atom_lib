@@ -16,22 +16,13 @@
       jit.enable_color = true;
   }
 
-  void SerialInterface::writeSerialFrequency(int frequency){
-
-      this->refresh_time = 1000/float(frequency);
-
-  }
 
 
   void SerialInterface::run(){
 
-    if (millis() - time_last > refresh_time){
-  
-        jit.sendPacket(motor_state, MOTOR_STATE_ID);
-        jit.sendPacket(imu_data, IMU_DATA_ID);
-        time_last = millis();
-
-    }
+      jit.sendPacketHz(motor_state, MOTOR_STATE_ID, motor_timer, 50);
+      jit.sendPacketHz(imu_data, IMU_DATA_ID, imu_timer, 50);
+    
 
     if(jit.available()){
 

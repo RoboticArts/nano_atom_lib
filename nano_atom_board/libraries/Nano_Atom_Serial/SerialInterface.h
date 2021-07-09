@@ -14,7 +14,6 @@ class SerialInterface{
 
     SerialInterface();
     void begin(int baudrate = 115200);
-    void writeSerialFrequency(int frequency = 100);
     void run();
     void setMotorState(int motor, float position, float velocity);
     float getMotorSetpoint(int motor);
@@ -53,6 +52,9 @@ class SerialInterface{
     MotorState motor_state;
     float motor_setpoint[4];
     char led_properties[31];
+
+    uint32_t imu_timer = 0;
+    uint32_t motor_timer = 0;
 
     unsigned long time_last = 0;
     unsigned long refresh_time;
