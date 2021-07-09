@@ -208,7 +208,7 @@
 
   void LedsBehavior::setBehavior(String led_properties_msg){
 
-    Serial.println(led_properties_msg);
+    //Serial.println(led_properties_msg);
 
     String properties[9];
     
@@ -219,7 +219,7 @@
     
       toIndex = led_properties_msg.indexOf(',', fromIndex);
       properties[i] = led_properties_msg.substring(fromIndex, toIndex); 
-      Serial.println(properties[i]); 
+      //Serial.println(properties[i]); 
       fromIndex = toIndex + 1; 
     }
     /*
