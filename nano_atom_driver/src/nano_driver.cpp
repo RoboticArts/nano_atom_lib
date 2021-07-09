@@ -220,7 +220,7 @@ double NanoDriver::currentTime(){
 
 void NanoDriver::run(){
 
-    jit.init(port.c_str(), baudrate, 20);
+    jit.init(port.c_str(), baudrate, 10);
 
     ros::Rate loop_rate(5000);
 
