@@ -241,7 +241,12 @@ void NanoDriver::run(){
             if (jit.receivePacket(jit_imu_data, IMU_DATA_ID)){
                 
                 updateRosImuData(jit_imu_data);
-                ros_imu_data_pub.publish(ros_imu_data);  
+
+                if (use_imu == true){
+
+                    ros_imu_data_pub.publish(ros_imu_data);  
+                    
+                }
             }
                
         }
